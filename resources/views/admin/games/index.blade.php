@@ -18,7 +18,13 @@
                     <ol>
                         @foreach ($games as $game)
                             @if(Auth::id() === $game->user_id)
-                                <li><a href="{{ route('admin.games.show' , ['game' => $game]) }}">{{$game->title}}</a></li>
+                                <li>
+                                    <a href="{{ route('admin.games.show' , ['game' => $game]) }}">{{$game->title}}</a>
+                                    -- Console:
+                                    @foreach ($game->platforms as $platform)
+                                    {{$platform->name}}
+                                    @endforeach
+                                </li>
                             @endif
                         @endforeach
                     </ol>

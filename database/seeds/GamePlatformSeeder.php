@@ -19,7 +19,7 @@ class GamePlatformSeeder extends Seeder
         $nPlatforms = count($platforms);
 
         foreach ($games as $game) {
-            $gamePlatforms = $faker->randomElements($platforms, rand(0, $nPlatforms));
+            $gamePlatforms = $faker->randomElements($platforms, rand(1, $nPlatforms));
             foreach ($gamePlatforms as $platformId) {
                 $game->platforms()->attach($platformId);
             }

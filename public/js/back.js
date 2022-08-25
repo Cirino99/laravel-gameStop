@@ -27905,7 +27905,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Simone\Documents\Boolean\Esercizi_Boolean\laravel-gameStop\resources\js\back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! C:\Users\glogh\Music\laravel.gamestop\laravel-gameStop\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })

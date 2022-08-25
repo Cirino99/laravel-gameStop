@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Game;
+use App\Mail\LeadToLead;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class GamesController extends Controller
 {
@@ -45,8 +47,20 @@ class GamesController extends Controller
             'price'   => 'required|integer|max:5000',
         ]);
         $data = $request->all() + ['user_id' => Auth::id()];
+
+
+
+
         // salvataggio
         $game = Game::create($data);
+
+
+
+        // inviare la mail al utente
+        Mail::to($game->user->email)->send(new LeadToLead($game));
+
+
+
 
         // redirect
         return redirect()->route('admin.games.show', ['game' => $game]);

@@ -14,7 +14,7 @@
                     @endif
 
                     <h1>Sono il create</h1>
-                    <form action="{{ route('admin.games.update',  ['game' => $game]) }}" method="post" novalidate>
+                    <form action="{{ route('admin.games.update',  ['game' => $game]) }}" method="post" enctype="multipart/form-data"  novalidate>
                         @method('PUT')
                         @csrf
 
@@ -29,12 +29,13 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="image">Image</label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="image" id="image" value="{{ old('image', $game->image) }}">
+                            <input class="form-control @error('title') is-invalid @enderror" type="file" accept="image/*" name="image" id="image" value="{{ old('image', $game->image) }}">
                             @error('image')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
+
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="price">Price</label>

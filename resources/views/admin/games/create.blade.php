@@ -14,7 +14,7 @@
                     @endif
 
                     <h1>Sono il create</h1>
-                    <form action="{{ route('admin.games.store') }}" method="post" novalidate>
+                    <form action="{{ route('admin.games.store') }}" method="post" enctype="multipart/form-data"  novalidate>
                         @csrf
 
                         <div class="mb-3">
@@ -28,12 +28,13 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="image">Image</label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="image" id="image" value="{{ old('image') }}">
+                            <input class="form-control @error('title') is-invalid @enderror" type="file" accept="image/*" name="image" id="image" value="{{ old('image') }}">
                             @error('image')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
+
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="price">Price</label>

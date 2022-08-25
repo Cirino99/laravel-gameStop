@@ -4,6 +4,9 @@ use App\Models\Game;
 use App\Models\User;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+
 
 class GamesSeeder extends Seeder
 {
@@ -15,11 +18,15 @@ class GamesSeeder extends Seeder
     public function run(Faker $faker)
     {
         $users_ids = User::all()->pluck('id');
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $game = new Game;
             $game->title = $faker->words(rand(2, 4), true);
             $game->user_id = $faker->randomElement($users_ids);
-            $game->image = 'https://picsum.photos/id/' . rand(1, 300) . '/500/300';
+            //immagine storage
+            $number = rand(0, 3);
+            $contents = new File(__DIR__ . '/../../storage/app/imgGame/img(' . $number . ').jpg');
+            $game->image = Storage::put('uploads', $contents);
+
             $game->price = $faker->numberBetween(0, 100);
             $game->save();
         }

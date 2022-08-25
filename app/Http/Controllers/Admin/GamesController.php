@@ -6,6 +6,7 @@ use App\Models\Game;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class GamesController extends Controller
 {
@@ -41,10 +42,20 @@ class GamesController extends Controller
     {
         $request->validate([
             'title'     => 'required|string|max:100',
-            'image'     => 'required|url',
+            'image'     => 'required|file|image|max:1024',
             'price'   => 'required|integer|max:5000',
         ]);
         $data = $request->all() + ['user_id' => Auth::id()];
+
+        //salviamo l'immagine in public
+        if(key_exists('image', $data)){
+
+            $img_path = Storage::put('uploads', $data['image']);
+
+            //aggiorniamo il valore della chiave image con il nome dell'img creata
+            $data['image'] = $img_path;
+        }
+
         // salvataggio
         $game = Game::create($data);
 
@@ -101,10 +112,25 @@ class GamesController extends Controller
     {
         $request->validate([
             'title'     => 'required|string|max:100',
-            'image'     => 'required|url',
+            'image'     => 'required|file|image|max:1024',
             'price'   => 'required|integer|max:5000',
         ]);
         $data = $request->all();
+
+        if(key_exists('image', $data)){
+
+            //elimina il file precedente se esiste
+            if($game->image){
+                Storage::delete($game->image);
+            }
+
+            //carica nuovo file
+            $img_path = Storage::put('uploads', $data['image']);
+
+            //aggiorna l'array $data con il percorso del file nuovo
+            $data['image'] = $img_path;
+        }
+
         // salvataggio
         $game->update($data);
 

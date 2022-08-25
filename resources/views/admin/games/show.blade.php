@@ -21,7 +21,7 @@
                             {{$platform->name}}
                         @endforeach
                     </p>
-                    <img src="{{$game->image}}" alt="{{$game->title}}">
+                    <img src="{{  asset ('storage/' . $game['image'] ) }}" alt="{{$game->title}}">
                     <br>
                     <a href="{{ route('admin.games.edit', ['game' => $game]) }}" class="btn btn-warning mt-3">Edit</a>
                     <form action="{{ route('admin.games.destroy', ['game' => $game]) }}" method="POST">

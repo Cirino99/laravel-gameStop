@@ -12,4 +12,9 @@ class Game extends Model
     {
         return $this->belongsTo('App\Models\User'); // il belongs to sta dalla parte dell'1 della relazione e il nome deve essere singolare
     }
+
+    public function platforms()
+    {
+        return $this->belongsToMany('App\Models\Platform');
+    }
 }

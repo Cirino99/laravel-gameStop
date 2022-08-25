@@ -16,7 +16,7 @@
 
                     <h1>{{$game->title}}</h1>
                     <h3>{{$game->price}}€</h3>
-                    <img src="{{$game->image}}" alt="{{$game->title}}">
+                    <img src="{{  asset ('storage/' . $game['image'] ) }}" alt="{{$game->title}}">
                     <br>
                     <a href="{{ route('admin.games.edit', ['game' => $game]) }}" class="btn btn-warning">Edit</a>
                     <form action="{{ route('admin.games.destroy', ['game' => $game]) }}" method="POST">

@@ -16,13 +16,18 @@
 
                     <h1>{{$game->title}}</h1>
                     <h3>{{$game->price}}€</h3>
+                    <p>Piattaforme supportate dal gioco:
+                        @foreach ($game->platforms as $platform)
+                            {{$platform->name}}
+                        @endforeach
+                    </p>
                     <img src="{{$game->image}}" alt="{{$game->title}}">
                     <br>
-                    <a href="{{ route('admin.games.edit', ['game' => $game]) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route('admin.games.edit', ['game' => $game]) }}" class="btn btn-warning mt-3">Edit</a>
                     <form action="{{ route('admin.games.destroy', ['game' => $game]) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger mt-3">Delete</button>
                     </form>
                 </div>
             </div>

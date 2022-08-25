@@ -14,16 +14,12 @@
                         </div>
                     @endif
 
-                    <h1>Sono l'index</h1>
+                    <h1>Elenco giochi:</h1>
                     <ol>
                         @foreach ($games as $game)
                             @if(Auth::id() === $game->user_id)
                                 <li>
                                     <a href="{{ route('admin.games.show' , ['game' => $game]) }}">{{$game->title}}</a>
-                                    -- Console:
-                                    @foreach ($game->platforms as $platform)
-                                    {{$platform->name}}
-                                    @endforeach
                                 </li>
                             @endif
                         @endforeach

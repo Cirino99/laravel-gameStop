@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function games()
+    {
+        return $this->hasMany('App\Models\Game'); // nella tabella che non ha il foreign key
+    }
 }
